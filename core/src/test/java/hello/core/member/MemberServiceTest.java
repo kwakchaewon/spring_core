@@ -1,13 +1,22 @@
 package hello.core.member;
 
+import hello.core.AppConfig;
 import org.assertj.core.api.Assertions;
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class MemberServiceTest {
 
     // 이때 memberService 는 MemberService 와 MemberServiceImpl 에 의존함.
     // DIP 위반: 구현 클래스에 의존
-    MemberService memberService = new MemberServiceImpl();
+
+    MemberService memberService;
+
+    @BeforeEach
+    public void beforeEach(){
+        AppConfig appConfig = new AppConfig();
+        memberService = appConfig.memberService();
+    }
 
     @Test
     void join(){
